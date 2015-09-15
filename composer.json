@@ -1,0 +1,16 @@
+{
+  "name": "whitekross/wp-badge-poser",
+  "description": "PugX Badge Poser For Wordpress",
+  "homepage": "http://alessandrofiore.com/",
+  "authors": [
+    {
+      "name": "Alessandro Fiore",
+      "email": "fiore.alessandro@yahoo.it"
+    }
+  ],
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=5.4",
+    "composer/installers": "~1.0"
+  }
+}
