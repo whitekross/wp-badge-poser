@@ -21,12 +21,6 @@ php:
 env:
   # WordPress 4.3
   - WP_VERSION=4.3
-  # WordPress 4.0
-  - WP_VERSION=4.2
-  # WordPress 4.1
-  - WP_VERSION=4.1
-  # WordPress 4.0
-  - WP_VERSION=4.0
   # WordPress 3.9
   - WP_VERSION=3.9
 
