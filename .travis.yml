@@ -5,17 +5,35 @@ notifications:
     on_success: never
     on_failure: change
 
+# Declare versions of PHP to test
 php:
-  - 5.4
+  # bleeding edge. alias of 7 until GA
+  - nightly
+  # aliased to a recent 5.6.x version
+  - 5.6
+  # aliased to a recent 5.5.x version
   - 5.5
+  # aliased to a recent 5.4.x version
+  - 5.4
 
+# WordPress comes from the Git mirror, where 'master' mirrors svn 'trunk' and
+# x.y mirrors the latest from the x.y branch
 env:
-  - WP_VERSION=latest WP_MULTISITE=0
+  # WordPress 4.3
+  - WP_VERSION=4.3
+  # WordPress 4.0
+  - WP_VERSION=4.2
+  # WordPress 4.1
+  - WP_VERSION=4.1
+  # WordPress 4.0
+  - WP_VERSION=4.0
+  # WordPress 3.9
+  - WP_VERSION=3.9
 
 matrix:
-  include:
-    - php: 5.4
-      env: WP_VERSION=latest WP_MULTISITE=1
+  fast_finish: true
+  allow_failures:
+    - php: nightly
 
 before_script:
   - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION 
