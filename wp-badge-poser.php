@@ -11,7 +11,7 @@
  */
 
 if ( ! defined( 'WPINC' ) ) {
-    die;
+    die('WPINC is not defined');
 }
 
 add_shortcode( 'badge-poser', 'badge_poser_shortcode' );
@@ -22,14 +22,15 @@ function badge_poser_shortcode( $atts ) {
             'package' => '',
             'version' => 'stable',
             'download' => false
-        ), $atts, 'badge-poser');
+        ), $atts, 
+           'badge-poser');
 
     // do nothing if package is emtpy
     if(empty($atts['package'])) {
         return false;
     }
     
-    if(!$atts['download']) {
+    if($atts['download'] === false) {
         $img = "<img src='https://poser.pugx.org/{$atts['package']}/v/{$atts['version']}' alt='Latest {$atts['version']} version of {$atts['package']}' />";
     } else {
         $img = "<img src='https://poser.pugx.org/{$atts['package']}/d/{$atts['download']}' alt='{$atts['download']} downloads for {$atts['package']}' />";
