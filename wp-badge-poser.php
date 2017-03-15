@@ -22,7 +22,7 @@ function badge_poser_shortcode( $atts ) {
             'package' => '',
             'version' => 'stable',
             'download' => false
-        ), $atts, 'badge-poser' );
+        ), $atts, 'badge-poser');
 
     // do nothing if package is emtpy
     if(empty($atts['package'])) {
@@ -35,8 +35,6 @@ function badge_poser_shortcode( $atts ) {
         $img = "<img src='https://poser.pugx.org/{$atts['package']}/d/{$atts['download']}' alt='{$atts['download']} downloads for {$atts['package']}' />";
     }
 
-    return "<a href='https://packagist.org/packages/{$atts['package']}'>
-            $img
-            </a>";
+    return "<a href='https://packagist.org/packages/{$atts['package']}'>$img</a>";
 
 }
