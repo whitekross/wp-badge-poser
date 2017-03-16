@@ -1,3 +1,5 @@
+sudo: false
+
 language: php
 
 notifications:
@@ -5,17 +7,15 @@ notifications:
     on_success: never
     on_failure: change
 
-# Declare versions of PHP to test
-php:
-  # aliased of 7
-  - 7.1
-  # aliased to a recent 5.6.x version
-  - 5.6
-  # aliased to a recent 5.5.x version
-  - 5.5
+branches:
+  only:
+    - master
 
-# WordPress comes from the Git mirror, where 'master' mirrors svn 'trunk' and
-# x.y mirrors the latest from the x.y branch
+php:
+  - 7.1
+  - 5.3
+  - 5.6
+
 env:
   # WordPress latest
   - WP_VERSION=latest
@@ -28,6 +28,18 @@ matrix:
     - php: 7.1
 
 before_script:
-  - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION 
+  - bash bin/install-wp-tests.sh wordpress_test root '' localhost $WP_VERSION
+  - export PATH="$HOME/.composer/vendor/bin:$PATH"
+  - |
+    if [[ ${TRAVIS_PHP_VERSION:0:2} == "7." ]]; then
+      composer global require "phpunit/phpunit=5.7.*"
+    else
+      composer global require "phpunit/phpunit=4.8.*"
+    fi
+  - |
+    composer global require wp-coding-standards/wpcs
+    phpcs --config-set installed_paths $HOME/.composer/vendor/wp-coding-standards/wpcs
 
-script: phpunit
+script:
+  #- phpcs --standard=phpcs.ruleset.xml $(find . -name '*.php')
+  - phpunit
